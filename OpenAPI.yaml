@@ -1,0 +1,79 @@
+openapi: "3.0.0"
+info:
+  title: "Rate Limited Notification Service"
+  description: "This service handles sending notifications with rate limiting, including time checks."
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /sendNotification:
+    post:
+      summary: "Send a notification to a user"
+      description: "Sends a specific type of notification to a user, respecting rate limits and considering the last notification time."
+      operationId: "sendNotification"
+      parameters:
+        - name: "user"
+          in: "query"
+          description: "The user ID to whom the notification will be sent."
+          required: true
+          schema:
+            type: "string"
+        - name: "type"
+          in: "query"
+          description: "The type of notification to send."
+          required: true
+          schema:
+            type: "string"
+            enum: ["status", "news", "marketing"]
+        - name: "lastNotification"
+          in: "query"
+          description: "The timestamp of the last notification sent to this user, in ISO 8601 format."
+          required: false
+          schema:
+            type: "string"
+            format: "date-time"
+      responses:
+        '200':
+          description: "Notification sent successfully."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+        '404':
+          description: "Endpoint not found."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+        '429':
+          description: "Rate limit exceeded."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+        '500':
+          description: "Internal server error due to user not found or other issues."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "X-API-KEY"
+security:
+  - ApiKeyAuth: []
