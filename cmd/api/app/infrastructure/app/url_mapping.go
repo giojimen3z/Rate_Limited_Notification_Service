@@ -3,10 +3,10 @@ package app
 import (
 	"fmt"
 
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/config"
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/container"
-	controller "github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/controller/health"
 	"github.com/gin-gonic/gin"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/config"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/container"
+	controller "github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/controller/health"
 )
 
 func MapUrls(router *gin.Engine) {
@@ -15,12 +15,8 @@ func MapUrls(router *gin.Engine) {
 	prefix := fmt.Sprintf("%s/Rate_Limited_Notification_Service/", prefixScope)
 
 	baseUrl := router.Group(prefix)
-	beer := baseUrl.Group("/Beer")
-	beers := baseUrl.Group("/Beers")
+	notification := baseUrl.Group("/notification")
 
-	beer.POST("", container.GetCreateBeerController().MakeCreateBeer)
-	beer.GET(":id", container.GetBeerController().MakeGetBeer)
-	beer.GET(":id/BoxPrice", container.GetBeerBoxPriceController().MakeGetBeerBoxPrice)
-	beers.GET("", container.GetListBeerController().MakeListBeer)
+	notification.POST("sendNotification", container.GetSendNotificationController().MakeSendNotification)
 
 }

@@ -3,8 +3,8 @@ package app
 import (
 	"os"
 
-	"github.com/Rate_Limited_Notification_Service/pkg/logger"
-	"github.com/Rate_Limited_Notification_Service/pkg/routerhandlers"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/logger"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/routerhandlers"
 )
 
 func StartApp() {

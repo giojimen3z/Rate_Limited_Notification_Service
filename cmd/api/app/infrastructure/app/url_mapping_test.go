@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Rate_Limited_Notification_Service/pkg/routerhandlers"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/routerhandlers"
 )
 
 func TestStartApp(t *testing.T) {
