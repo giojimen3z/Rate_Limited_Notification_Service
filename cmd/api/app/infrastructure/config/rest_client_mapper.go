@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/Rate_Limited_Notification_Service/pkg/logger"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/logger"
 	"github.com/pkg/errors"
 	"gopkg.in/go-playground/validator.v8"
 )

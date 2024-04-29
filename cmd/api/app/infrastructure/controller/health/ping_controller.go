@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/newrelic/go-agent/_integrations/nrgin/v1"
 )
 
 const (
@@ -22,9 +21,5 @@ type pingControllerInterface interface {
 type pingController struct{}
 
 func (controller *pingController) Ping(c *gin.Context) {
-	if txn := nrgin.Transaction(c); txn != nil {
-		_ = txn.Ignore()
-	}
-
 	c.String(http.StatusOK, Pong)
 }

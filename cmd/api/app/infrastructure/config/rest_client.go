@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	"github.com/Rate_Limited_Notification_Service/pkg/logger"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/logger"
 	"github.com/go-resty/resty/v2"
 )
 

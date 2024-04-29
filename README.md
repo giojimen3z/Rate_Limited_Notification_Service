@@ -46,3 +46,12 @@ The file should start with:
 
 This image has native support for Go Modules and requires the use of it as the dependency management tool.
 
+ ##CURL
+
+curl --location 'http://localhost:8080/Rate_Limited_Notification_Service/notification/sendNotification' \
+--header 'Content-Type: application/json' \
+--data '{
+"user": "user123",
+"type": "status",
+"last_notification": "2021-03-10T02:45:00Z"
+}'

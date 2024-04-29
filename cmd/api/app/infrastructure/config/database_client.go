@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/Rate_Limited_Notification_Service/pkg/logger"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/pkg/logger"
 	_ "github.com/go-sql-driver/mysql"
 )
 

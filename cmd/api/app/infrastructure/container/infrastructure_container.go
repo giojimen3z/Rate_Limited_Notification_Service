@@ -3,39 +3,23 @@ package container
 import (
 	"database/sql"
 
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/domain/port"
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/adapter/client"
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/adapter/repository"
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/config"
-	"github.com/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/controller/beer"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/domain/port"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/adapter/repository"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/config"
+	"github.com/giojimen3z/Rate_Limited_Notification_Service/cmd/api/app/infrastructure/controller/send_notification"
 )
 
-func GetCreateBeerController() *beer.CreateBeerController {
-	return &beer.CreateBeerController{CreateBeerApplication: getCreateBeerApplication()}
+func GetSendNotificationController() *send_notification.SendNotificationController {
+	return &send_notification.SendNotificationController{SendNotificationApplication: getSendNotificationApplication()}
 }
 
-func GetListBeerController() *beer.ListBeerController {
-	return &beer.ListBeerController{ListBeerApplication: getListBeerApplication()}
-}
-func GetBeerController() *beer.GetBeerController {
-	return &beer.GetBeerController{GetBeerApplication: getBeerApplication()}
-}
-func GetBeerBoxPriceController() *beer.GetBeerBoxPriceController {
-	return &beer.GetBeerBoxPriceController{GetBeerBoxPriceApplication: getBeerBoxPriceApplication()}
-}
-
-func getCreateBeerRepository() port.BeerRepository {
-	return &repository.BeerMysqlRepository{
+func getSendNotificationRepository() port.SendNotificationRepository {
+	return &repository.SendNotificationRepository{
 		WriteClient:          getWriteConnectionClient(),
 		ReadConnectionClient: getReadConnectionClient(),
 	}
 }
 
-func getConvertCurrencyClient() port.CurrencyClient {
-	return &client.CurrencyConvertClient{
-		RestClient: getRestConnectionClient(),
-	}
-}
 func getWriteConnectionClient() *sql.DB {
 	conn, _ := config.GetWriteConnection()
 	return conn
@@ -44,9 +28,4 @@ func getWriteConnectionClient() *sql.DB {
 func getReadConnectionClient() *sql.DB {
 	conn, _ := config.GetReadConnection()
 	return conn
-}
-
-func getRestConnectionClient() config.CustomRestClient {
-
-	return config.CustomRestClient{}
 }
